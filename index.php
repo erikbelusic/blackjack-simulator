@@ -2,14 +2,6 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-$deck = [];
+$shoe = CardFactory::createDecks(2);
 
-foreach (Card::$allowedSuits as $suit)
-{
-    foreach (Card::$allowedRanks as $rank)
-    {
-        array_push($deck, new Card($rank, $suit));
-    }
-}
-
-dump($deck);
+dump($shoe);
