@@ -4,7 +4,7 @@ class Card
 {
     const COULD_NOT_INSTANTIATE_OBJECT = 'Card class could not be instantiated - check constructor parameters';
 
-    public static $allowedRanks = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
+    public static $allowedRanks = ['ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king'];
 
     public static $allowedSuits = ['clubs', 'diamonds', 'hearts', 'spades'];
 
@@ -16,7 +16,7 @@ class Card
     {
         if ( ! $this->isRank($rank) || ! $this->isSuit($suit))
         {
-            exit(STATIC::COULD_NOT_INSTANTIATE_OBJECT);
+            exit(static::COULD_NOT_INSTANTIATE_OBJECT);
         }
 
         $this->rank = $rank;
@@ -35,7 +35,7 @@ class Card
 
     protected function isRank($rank)
     {
-        if (in_array($rank, STATIC::$allowedRanks))
+        if (in_array($rank, static::$allowedRanks))
         {
             return true;
         }
@@ -45,7 +45,7 @@ class Card
 
     protected function isSuit($suit)
     {
-        if (in_array($suit, STATIC::$allowedSuits))
+        if (in_array($suit, static::$allowedSuits))
         {
             return true;
         }
