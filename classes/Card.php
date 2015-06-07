@@ -8,6 +8,22 @@ class Card
 
     public static $allowedSuits = ['clubs', 'diamonds', 'hearts', 'spades'];
 
+    public static $values = [
+        'ace'   => [1,11],
+        2       => 2,
+        3       => 3,
+        4       => 4,
+        5       => 5,
+        6       => 6,
+        7       => 7,
+        8       => 8,
+        9       => 9,
+        10      => 10,
+        'jack'  => 10,
+        'queen' => 10,
+        'king'  => 10
+    ];
+
     protected $rank;
 
     protected $suit;
@@ -31,6 +47,11 @@ class Card
     public function getRank()
     {
         return $this->rank;
+    }
+
+    public function getValue()
+    {
+        return static::$values[$this->rank];
     }
 
     protected function isRank($rank)

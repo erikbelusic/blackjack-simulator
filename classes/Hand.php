@@ -2,6 +2,8 @@
 
 class Hand
 {
+    protected $cards = [];
+
     public function getNumberOfCards()
     {
         // TODO: implement
@@ -17,5 +19,8 @@ class Hand
         // TODO: implement
     }
 
-
+    public function addCard(Card $card)
+    {
+        array_push($this->cards, $card);
+    }
 }
