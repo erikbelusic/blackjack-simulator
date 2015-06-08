@@ -2,19 +2,29 @@
 
 class BlackJackGame
 {
+    const HAND_HARD = 'hand.hard';
+
+    const HAND_SOFT = 'hand.soft';
+
+    const HAND_SPLITTABLE = 'hand.splittable';
+
     const ACTION_HIT = 'action.hit';
 
     const ACTION_STAND = 'action.stand';
 
-    protected $status = [
-        'round' => 0
-    ];
+    protected $status;
 
     protected $shoe;
 
     protected $player;
 
     protected $dealer;
+
+    function __construct($status)
+    {
+        $this->status = new GameStatus();
+    }
+
 
     protected function dealNewRound()
     {
@@ -83,17 +93,23 @@ class BlackJackGame
     protected function playRound()
     {
         $playerAction = $this->player->chooseAction($this->status);
-        $this->doAction($playerAction);
+        $this->doAction($this->player, $playerAction);
+
         $dealerAction = $this->dealer->chooseAction($this->status);
-        $this->doAction($dealerAction);
+        $this->doAction($this->dealer, $dealerAction);
     }
 
-    private function doAction($action)
+    private function doAction(CanPlayBlackJack $person, $action)
     {
         switch ($action) {
             case static::ACTION_STAND :
                 dump('action.stand has been taken');
-                return true;
+                break;
+            case static::ACTION_HIT :
+                dump('action.hit has been taken');
+                $this->dealTo($person);
+                $dealerAction = $person->chooseAction($this->status);
+                $this->doAction($person, $dealerAction);
                 break;
         }
     }
