@@ -16,7 +16,13 @@ class Dealer implements CanPlayBlackJack
 
     public function chooseAction($status)
     {
-        return BlackJackGame::ACTION_STAND;
+        if ($this->hand->getTotal() < 17)
+        {
+            return BlackJackGame::ACTION_HIT;
+        }
+        else {
+            return BlackJackGame::ACTION_STAND;
+        }
     }
 
     public function discardAllFromHands()
